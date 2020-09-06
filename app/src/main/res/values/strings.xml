@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Cryptostats</string>
+    <string name="no_data_error_onStart">no data (start)</string>
+    <string name="no_data_error">no data</string>
+    <string name="no_data_yet">no data yet</string>
+
+</resources>
