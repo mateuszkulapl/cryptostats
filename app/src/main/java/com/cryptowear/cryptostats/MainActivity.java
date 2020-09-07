@@ -62,67 +62,7 @@ public class MainActivity extends AppCompatActivity {
         tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-
-
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Ethereum","ETH","https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Tether","USDT","https://s2.coinmarketcap.com/static/img/coins/64x64/825.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("XRP","XRP","https://s2.coinmarketcap.com/static/img/coins/64x64/52.png"); cryptocurrencies.add(tempCryptocurrency);
-        /*
-
         tempCryptocurrency=new Cryptocurrency("Chainlink","LINK","https://s2.coinmarketcap.com/static/img/coins/64x64/1975.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("Bitcoin Cash","BCH","https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Polkadot","DOT","https://s2.coinmarketcap.com/static/img/coins/64x64/6636.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Binance Coin","BNB","https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Litecoin","LTC","https://s2.coinmarketcap.com/static/img/coins/64x64/2.png"); cryptocurrencies.add(tempCryptocurrency);
@@ -217,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         tempCryptocurrency=new Cryptocurrency("MonaCoin","MONA","https://s2.coinmarketcap.com/static/img/coins/64x64/213.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Bytom","BTM","https://s2.coinmarketcap.com/static/img/coins/64x64/1866.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Solana","SOL","https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png"); cryptocurrencies.add(tempCryptocurrency);
-*/
+
     return cryptocurrencies;
     }
 }
