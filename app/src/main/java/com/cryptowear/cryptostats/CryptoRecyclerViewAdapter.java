@@ -22,16 +22,6 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
     List<Cryptocurrency> CryptocurrencyList;
     private LayoutInflater inflater;
 
-
-    public TextView mTitle;
-    public TextView mContent;
-    public CryptoRecyclerViewAdapter(View pItem) {
-        super();
-        mTitle = (TextView) pItem.findViewById(R.id.name);
-        mContent = (TextView) pItem.findViewById(R.id.name);
-    }
-
-
     CryptoRecyclerViewAdapter(Context context, List<Cryptocurrency> CryptocurrencyList) {
         this.inflater = LayoutInflater.from(context);
         this.CryptocurrencyList = CryptocurrencyList;
@@ -40,10 +30,11 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //View view = inflater.inflate(R.layout.crypto_element, parent, false);
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.crypto_element, parent, false);
+        View view = inflater.inflate(R.layout.crypto_element, parent, false);
+
         return new ViewHolder(view);
     }
+
     //wiązanie elementu z widokiem
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -51,31 +42,31 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         holder.icon.setImageResource(android.R.color.transparent);
         holder.name.setText(Cryptocurrency.getName());
         Double actualPrice=Cryptocurrency.getPrice();
-        String actualPriceOutput = actualPrice!=null ? actualPrice.toString() : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych (konstruktor przypisuje null)
-        holder.actual_price.setText(actualPriceOutput);
+        String actualPriceOutput = actualPrice!=null ? String.format("%.14f",actualPrice) : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie
+        // poprawnosci danych
+        // (konstruktor
+        // przypisuje null)
+        holder.actual_price.setText(Cryptocurrency.getUnit()+" "+actualPriceOutput);
 
         holder.own_number.setText(Cryptocurrency.getQuantity().toString());//delete
         Double ownValue=Cryptocurrency.getOwnValue();
         String ownValueOutput = ownValue!=null ? ownValue.toString() : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych (wynosi null, gdy nie pobrano danych o kursie)
         holder.own_value.setText(ownValueOutput);
 
-        if(Cryptocurrency.getBitmap()!=null)//wyswietla z bazy
+        if(Cryptocurrency.getImageUrl()!=null)//pobieranie zdjecia z url, todo:zapisanie do bazy (picasso)
         {
-           holder.icon.setImageBitmap(Cryptocurrency.getBitmap());
-           holder.name.setText("z bazy");
-        }
-        else {//pobiera z url
-            holder.icon.setDrawingCacheEnabled(true);
+             holder.icon.setDrawingCacheEnabled(true);
              DownloadImageTask temp= new DownloadImageTask((ImageView) holder.icon);
              temp.execute(Cryptocurrency.getImageUrl());
-
         }
+
     }
     //liczba elementów listy
     @Override
     public int getItemCount() {
         return CryptocurrencyList.size();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         TextView actual_price;
@@ -92,4 +83,6 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
             icon = itemView.findViewById(R.id.icon);
         }
     }
+
+
 }

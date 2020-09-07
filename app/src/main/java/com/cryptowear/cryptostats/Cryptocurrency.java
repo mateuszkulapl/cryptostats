@@ -2,6 +2,7 @@ package com.cryptowear.cryptostats;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ImageView;
@@ -22,8 +23,7 @@ public class Cryptocurrency {
     Double price;
     Date lastSync;//ostatnia aktualizacja
     String imageUrl;
-    ImageView imageV;
-    Bitmap bitmap;
+    String unit;//symbol waluty na ktora jest przeliczane
 
     public Cryptocurrency(String name, String symbol) {
         this.name = name;
@@ -32,8 +32,7 @@ public class Cryptocurrency {
         this.price = null;
         this.lastSync = null;
         this.imageUrl=null;
-        this.imageV=null;
-        this.bitmap=null;
+        this.unit="";
     }
 
     public Cryptocurrency(String name, String symbol, String imageUrl) {
@@ -43,9 +42,7 @@ public class Cryptocurrency {
         this.price = null;
         this.lastSync = null;
         this.imageUrl=imageUrl;
-        this.imageV=null;
-        this.bitmap=null;
-
+        this.unit="";
     }
     public String getName() {
         return name;
@@ -71,8 +68,7 @@ public class Cryptocurrency {
        if(price==null)
            return null;
        else {
-           final double val = price * quantity;
-           return val;
+           return price * quantity;
        }
     }
 
@@ -80,47 +76,16 @@ public class Cryptocurrency {
         return imageUrl;
     }
 
-    public ImageView getImageV() {
-        return imageV;
+
+    public void setPrice(double exchangeRate) {
+        this.price=exchangeRate;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public String getUnit() {
+        return unit;
     }
 
-    public void setImageV(ImageView imageV) {
-        this.imageV = imageV;
-
-        this.bitmap=imageV.getDrawingCache();
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap=bitmap;
-    }
-
-
-    public static Bitmap getBitmapFromURL(String src) {
-        try {
-
-            //uncomment below line in image name have spaces.
-            //src = src.replaceAll(" ", "%20");
-
-            URL url = new URL(src);
-
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            Bitmap myBitmap=null;
-            InputStream input = connection.getInputStream();
-            myBitmap = BitmapFactory.decodeStream(input);
-            Log.d("Bitmapa",myBitmap.toString());
-            return myBitmap;
-        } catch (Exception e) {
-
-            return null;
-        }
-    }
-
-
-
 }
