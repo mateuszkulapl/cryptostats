@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
         tempCryptocurrency=new Cryptocurrency("MonaCoin","MONA","https://s2.coinmarketcap.com/static/img/coins/64x64/213.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Bytom","BTM","https://s2.coinmarketcap.com/static/img/coins/64x64/1866.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Solana","SOL","https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png"); cryptocurrencies.add(tempCryptocurrency);
-
+*/
     return cryptocurrencies;
     }
 
