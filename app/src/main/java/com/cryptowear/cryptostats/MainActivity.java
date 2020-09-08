@@ -7,26 +7,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     List<Cryptocurrency> cryptocurrencies;
-    String apiKey="";//coimarketcap api key
+    String apiKey="ae4cd532-0871-4188-8070-8d93b60a9806";//coimarketcap api key
+    private CryptoRecyclerViewAdapter.RecyclerViewClickListener listener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setOnClickListener();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         cryptocurrencies = InitiateCrypto();
@@ -49,11 +56,24 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         // ustawiamy LayoutManagera
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CryptoRecyclerViewAdapter adapter = new CryptoRecyclerViewAdapter(this, cryptocurrencies);
-        //adapter.setClickListener(this);//not implemented
+        CryptoRecyclerViewAdapter adapter = new CryptoRecyclerViewAdapter(this, cryptocurrencies, listener);
+       // adapter.setClickListener(this);//not implemented
         recyclerView.setAdapter(adapter);
 
 
+    }
+
+    private void setOnClickListener() {
+        listener= new CryptoRecyclerViewAdapter.RecyclerViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(getApplicationContext(), ChangeQuantity.class);
+
+                //to nie chce mi dzialac idk why
+                intent.putExtra("symbol", String.valueOf(cryptocurrencies.get(position)));
+                startActivity(intent);
+            }
+        };
     }
 
     @Override

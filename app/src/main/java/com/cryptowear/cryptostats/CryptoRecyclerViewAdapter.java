@@ -21,10 +21,13 @@ import static java.lang.String.valueOf;
 public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecyclerViewAdapter.ViewHolder> {
     List<Cryptocurrency> CryptocurrencyList;
     private LayoutInflater inflater;
+    private RecyclerViewClickListener listener;
 
-    CryptoRecyclerViewAdapter(Context context, List<Cryptocurrency> CryptocurrencyList) {
+
+    CryptoRecyclerViewAdapter(Context context, List<Cryptocurrency> CryptocurrencyList, RecyclerViewClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.CryptocurrencyList = CryptocurrencyList;
+        this.listener=listener;
     }
     //tworzenie nowego elementu dla recyclerview
     @NonNull
@@ -53,6 +56,7 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         String ownValueOutput = ownValue!=null ? ownValue.toString() : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych (wynosi null, gdy nie pobrano danych o kursie)
         holder.own_value.setText(ownValueOutput);
 
+
         if(Cryptocurrency.getImageUrl()!=null)//pobieranie zdjecia z url, todo:zapisanie do bazy (picasso)
         {
              holder.icon.setDrawingCacheEnabled(true);
@@ -67,7 +71,7 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         return CryptocurrencyList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
         TextView actual_price;
         TextView own_number;
@@ -81,8 +85,17 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
             own_number = itemView.findViewById(R.id.own_number);
             own_value = itemView.findViewById(R.id.own_value);
             icon = itemView.findViewById(R.id.icon);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View itemView) {
+            listener.onClick(itemView, getAdapterPosition());
         }
     }
 
-
+    public interface RecyclerViewClickListener
+    {
+        void onClick(View v, int position);
+    }
 }
