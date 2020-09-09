@@ -68,9 +68,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(getApplicationContext(), ChangeQuantity.class);
-
                 //to nie chce mi dzialac idk why
-                intent.putExtra("symbol", String.valueOf(cryptocurrencies.get(position)));
+             //  //   intent.putExtra("symbol", String.valueOf(cryptocurrencies.get(position)));
+                //adapter.notifyItemChanged(t);
                 startActivity(intent);
             }
         };

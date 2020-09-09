@@ -36,6 +36,8 @@ public class ChangeQuantity extends AppCompatActivity {
                 String input = t.getText().toString();
                 ((TextView)findViewById(R.id.own_number)).setText(input);
                 Log.d("info",input);
+                //data.set(t, input);
+              //  adapter.notifyItemChanged(t);
                 finish();
             }
         }));

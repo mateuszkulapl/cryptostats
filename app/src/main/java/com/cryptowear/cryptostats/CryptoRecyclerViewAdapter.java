@@ -94,6 +94,8 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         }
     }
 
+
+
     public interface RecyclerViewClickListener
     {
         void onClick(View v, int position);
