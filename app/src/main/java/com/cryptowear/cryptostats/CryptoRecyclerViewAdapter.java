@@ -51,16 +51,20 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         // (konstruktor
         // przypisuje null)
         holder.actual_price.setText(Cryptocurrency.getUnit()+" "+actualPriceOutput);
+        String plusMinusChange="";
 
         if(Cryptocurrency.getPercentChange()>0)
         {
          holder.actual_price.setTextColor(Color.parseColor("#00ff00"));
+            plusMinusChange+="+";
         }
         else {
             if (Cryptocurrency.getPercentChange() < 0) {
                 holder.actual_price.setTextColor(Color.parseColor("#ff0000"));
             }
         }
+        plusMinusChange+=String.format("%.2f",Cryptocurrency.getPercentChange())+"%";
+        holder.change.setText(plusMinusChange);
 
         holder.own_number.setText(Cryptocurrency.getQuantity().toString());//delete
         Double ownValue=Cryptocurrency.getOwnValue();
@@ -85,6 +89,7 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView name;
         TextView actual_price;
+        TextView change;
         TextView own_number;
         TextView own_value;
         ImageView icon;
@@ -93,6 +98,7 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
             super(itemView);
             name = itemView.findViewById(R.id.name);
             actual_price = itemView.findViewById(R.id.actual_price);
+            change = itemView.findViewById(R.id.change);
             own_number = itemView.findViewById(R.id.own_number);
             own_value = itemView.findViewById(R.id.own_value);
             icon = itemView.findViewById(R.id.icon);
