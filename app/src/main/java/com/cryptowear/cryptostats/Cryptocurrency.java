@@ -17,13 +17,14 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Cryptocurrency {
-    String name;
-    String symbol;//skrot
-    Double quantity;//posiadana liczba
-    Double price;
-    Date lastSync;//ostatnia aktualizacja
-    String imageUrl;
-    String unit;//symbol waluty na ktora jest przeliczane
+    private String name;
+    private String symbol;//skrot
+    private Double quantity;//posiadana liczba
+    private Double price;
+    private String lastSync;//ostatnia aktualizacja//todo: change to Date
+    private String imageUrl;
+    private String unit;//symbol waluty na ktora jest przeliczane
+    private Double percentChange;
 
     public Cryptocurrency(String name, String symbol) {
         this.name = name;
@@ -32,7 +33,7 @@ public class Cryptocurrency {
         this.price = null;
         this.lastSync = null;
         this.imageUrl=null;
-        this.unit="";
+        this.unit="$";
     }
 
     public Cryptocurrency(String name, String symbol, String imageUrl) {
@@ -72,7 +73,7 @@ public class Cryptocurrency {
         return imageUrl;
     }
 
-    public void setPrice(double exchangeRate) {
+    public void setPrice(Double exchangeRate) {
         this.price=exchangeRate;
     }
 
@@ -85,5 +86,16 @@ public class Cryptocurrency {
         {
             this.quantity = quantity;
         }
+    }
+
+    public void setPrice(Double exchangeRate, String lastSync, Double percentChange) {
+        this.price=exchangeRate;
+        this.lastSync=lastSync;
+        this.percentChange=percentChange;
+
+    }
+
+    public Double getPercentChange() {
+        return percentChange;
     }
 }

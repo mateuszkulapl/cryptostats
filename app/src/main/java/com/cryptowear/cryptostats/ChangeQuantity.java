@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChangeQuantity extends AppCompatActivity {
-    TextView quantityInput;
-    int position;
+    private TextView quantityInput;
+    private int position;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_quantity);

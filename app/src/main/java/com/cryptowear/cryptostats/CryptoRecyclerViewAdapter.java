@@ -2,6 +2,7 @@ package com.cryptowear.cryptostats;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.util.Log;
@@ -50,6 +51,16 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         // (konstruktor
         // przypisuje null)
         holder.actual_price.setText(Cryptocurrency.getUnit()+" "+actualPriceOutput);
+
+        if(Cryptocurrency.getPercentChange()>0)
+        {
+         holder.actual_price.setTextColor(Color.parseColor("#00ff00"));
+        }
+        else {
+            if (Cryptocurrency.getPercentChange() < 0) {
+                holder.actual_price.setTextColor(Color.parseColor("#ff0000"));
+            }
+        }
 
         holder.own_number.setText(Cryptocurrency.getQuantity().toString());//delete
         Double ownValue=Cryptocurrency.getOwnValue();
