@@ -28,8 +28,10 @@ import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
     List<Cryptocurrency> cryptocurrencies;
-    String apiKey="ae4cd532-0871-4188-8070-8d93b60a9806";//coimarketcap api key
+    String apiKey="";//coimarketcap api key
     private CryptoRecyclerViewAdapter.RecyclerViewClickListener listener;
+    RecyclerView recyclerView;
+    CryptoRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,42 +40,60 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         cryptocurrencies = InitiateCrypto();
 
+        updateAllExchangeRates();
+
+        this.recyclerView = findViewById(R.id.cryptoRV);
+
+        this.recyclerView.setHasFixedSize(true);
+        //ustawiamy LayoutManagera
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        this.adapter = new CryptoRecyclerViewAdapter(this, cryptocurrencies, listener);
+        //adapter.setClickListener(this);//not implemented
+        this.recyclerView.setAdapter(this.adapter);
 
 
-       /* for(int i = 0; i<cryptocurrencies.size(); i++)
+    }
+
+    private void updateAllExchangeRates() {
+        for(int i = 0; i<this.cryptocurrencies.size(); i++)
         {
             SetExchangeRate(i, this.apiKey);
-        }*/
-        for(int i = 0; i<cryptocurrencies.size(); i++)
-        {
-            SetExchangeRate(i, this.apiKey);
-            cryptocurrencies.get(i).setUnit("$");
+
         }
-
-
-        RecyclerView recyclerView = findViewById(R.id.cryptoRV);
-
-        recyclerView.setHasFixedSize(true);
-        // ustawiamy LayoutManagera
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        CryptoRecyclerViewAdapter adapter = new CryptoRecyclerViewAdapter(this, cryptocurrencies, listener);
-       // adapter.setClickListener(this);//not implemented
-        recyclerView.setAdapter(adapter);
-
-
     }
 
     private void setOnClickListener() {
         listener= new CryptoRecyclerViewAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View v, int position) {
-                Intent intent = new Intent(getApplicationContext(), ChangeQuantity.class);
-                //to nie chce mi dzialac idk why
-             //  //   intent.putExtra("symbol", String.valueOf(cryptocurrencies.get(position)));
-                //adapter.notifyItemChanged(t);
-                startActivity(intent);
+                Intent changeQuantityIntent = new Intent(getApplicationContext(), ChangeQuantity.class);
+                changeQuantityIntent.putExtra("position", position);
+                changeQuantityIntent.putExtra("symbol", String.valueOf(cryptocurrencies.get(position).getSymbol()));
+                changeQuantityIntent.putExtra("name", String.valueOf(cryptocurrencies.get(position).getName()));
+                changeQuantityIntent.putExtra("quantity", String.valueOf(cryptocurrencies.get(position).getQuantity()));
+                startActivityForResult(changeQuantityIntent,1);
+
             }
         };
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (resultCode == RESULT_OK) {
+                Double newQuantity = data.getDoubleExtra("newQuantity", 0);
+                Toast.makeText(this,newQuantity.toString(), Toast.LENGTH_SHORT).show();
+                int position=data.getIntExtra("position",-1);
+                if(position>=0&&position<cryptocurrencies.size()) {
+                    cryptocurrencies.get(position).setQuantity(newQuantity);
+                    this.adapter.notifyDataSetChanged();
+                }
+            }
+            if (resultCode == RESULT_CANCELED) {
+                Toast.makeText(this, "cancelled", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -95,6 +115,46 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void SetExchangeRate(final int index, final String apiKey) {
+        final String cryptoSymbol=cryptocurrencies.get(index).getSymbol();
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                double exchangeRate = AsyncGetExhangeRate(cryptoSymbol, apiKey);
+                cryptocurrencies.get(index).setPrice(exchangeRate);
+
+            }
+        });
+
+    }
+    private double AsyncGetExhangeRate(String symbol, String apiKey) {
+        double exchangeRate = 0;
+        try {
+            URL nbpEndpoint = new URL("https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount=1&symbol="+symbol);
+            Log.d(symbol, String.valueOf(nbpEndpoint));
+            HttpURLConnection apiConnection = (HttpURLConnection) nbpEndpoint.openConnection();
+            apiConnection.setRequestProperty("Accept", "application/json");
+            apiConnection.setRequestProperty("X-CMC_PRO_API_KEY", apiKey);
+            if (apiConnection.getResponseCode() == 200) {
+                BufferedReader br = new BufferedReader(new InputStreamReader(apiConnection.getInputStream()));
+                //cały obiekt jest w jednej linii
+                JSONObject jsonObject = new JSONObject(br.readLine());
+                JSONObject apiData = (JSONObject) jsonObject.getJSONObject("data");
+                JSONObject apiDataQuote=(JSONObject) apiData.getJSONObject("quote");
+                JSONObject apiDataQuoteUsd=(JSONObject) apiDataQuote.getJSONObject("USD");
+                exchangeRate=apiDataQuoteUsd.getDouble("price");
+                apiConnection.disconnect();
+                Log.d("price",Double.toString(exchangeRate));
+                this.adapter.notifyDataSetChanged();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return exchangeRate;
+
+    }
+
+
     List<Cryptocurrency> InitiateCrypto()
     {
         List<Cryptocurrency> cryptocurrencies= new ArrayList<>();
@@ -113,9 +173,9 @@ public class MainActivity extends AppCompatActivity {
         tempCryptocurrency=new Cryptocurrency("TRON","TRX","https://s2.coinmarketcap.com/static/img/coins/64x64/1958.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Tezos","XTZ","https://s2.coinmarketcap.com/static/img/coins/64x64/2011.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("USD Coin","USDC","https://s2.coinmarketcap.com/static/img/coins/64x64/3408.png"); cryptocurrencies.add(tempCryptocurrency);
-        /*tempCryptocurrency=new Cryptocurrency("Stellar","XLM","https://s2.coinmarketcap.com/static/img/coins/64x64/512.png"); cryptocurrencies.add(tempCryptocurrency);
+        tempCryptocurrency=new Cryptocurrency("Stellar","XLM","https://s2.coinmarketcap.com/static/img/coins/64x64/512.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Monero","XMR","https://s2.coinmarketcap.com/static/img/coins/64x64/328.png"); cryptocurrencies.add(tempCryptocurrency);
-        tempCryptocurrency=new Cryptocurrency("UNUS SED LEO","LEO","https://s2.coinmarketcap.com/static/img/coins/64x64/3957.png"); cryptocurrencies.add(tempCryptocurrency);
+        /*tempCryptocurrency=new Cryptocurrency("UNUS SED LEO","LEO","https://s2.coinmarketcap.com/static/img/coins/64x64/3957.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Neo","NEO","https://s2.coinmarketcap.com/static/img/coins/64x64/1376.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("NEM","XEM","https://s2.coinmarketcap.com/static/img/coins/64x64/873.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Cosmos","ATOM","https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png"); cryptocurrencies.add(tempCryptocurrency);
@@ -198,46 +258,9 @@ public class MainActivity extends AppCompatActivity {
         tempCryptocurrency=new Cryptocurrency("Bytom","BTM","https://s2.coinmarketcap.com/static/img/coins/64x64/1866.png"); cryptocurrencies.add(tempCryptocurrency);
         tempCryptocurrency=new Cryptocurrency("Solana","SOL","https://s2.coinmarketcap.com/static/img/coins/64x64/5426.png"); cryptocurrencies.add(tempCryptocurrency);
 */
-    return cryptocurrencies;
+        return cryptocurrencies;
     }
 
 
-
-
-    public void SetExchangeRate(final int index, final String apiKey) {
-        final String cryptoSymbol=cryptocurrencies.get(index).getSymbol();
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
-                double exchangeRate = AsyncGetExhangeRate(cryptoSymbol, apiKey);
-                cryptocurrencies.get(index).setPrice(exchangeRate);
-            }
-        });
-    }
-    private double AsyncGetExhangeRate(String symbol, String apiKey) {
-        double exchangeRate = 0;
-        try {
-            URL nbpEndpoint = new URL("https://pro-api.coinmarketcap.com/v1/tools/price-conversion?amount=1&symbol="+symbol);
-            Log.d(symbol, String.valueOf(nbpEndpoint));
-            HttpURLConnection apiConnection = (HttpURLConnection) nbpEndpoint.openConnection();
-            apiConnection.setRequestProperty("Accept", "application/json");
-            apiConnection.setRequestProperty("X-CMC_PRO_API_KEY", apiKey);
-            if (apiConnection.getResponseCode() == 200) {
-                BufferedReader br = new BufferedReader(new InputStreamReader(apiConnection.getInputStream()));
-                //cały obiekt jest w jednej linii
-                JSONObject jsonObject = new JSONObject(br.readLine());
-                JSONObject apiData = (JSONObject) jsonObject.getJSONObject("data");
-                JSONObject apiDataQuote=(JSONObject) apiData.getJSONObject("quote");
-                JSONObject apiDataQuoteUsd=(JSONObject) apiDataQuote.getJSONObject("USD");
-                exchangeRate=apiDataQuoteUsd.getDouble("price");
-                apiConnection.disconnect();
-                Log.d("price",Double. toString(exchangeRate));
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return exchangeRate;
-    }
 
 }

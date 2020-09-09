@@ -42,7 +42,7 @@ public class Cryptocurrency {
         this.price = null;
         this.lastSync = null;
         this.imageUrl=imageUrl;
-        this.unit="";
+        this.unit="$";
     }
     public String getName() {
         return name;
@@ -60,10 +60,6 @@ public class Cryptocurrency {
         return price;
     }
 
-    public Date getLastSync() {
-        return lastSync;
-    }
-
    public Double getOwnValue() {
        if(price==null)
            return null;
@@ -76,7 +72,6 @@ public class Cryptocurrency {
         return imageUrl;
     }
 
-
     public void setPrice(double exchangeRate) {
         this.price=exchangeRate;
     }
@@ -85,7 +80,10 @@ public class Cryptocurrency {
         return unit;
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
+    public void setQuantity(Double quantity) {
+        if(quantity>=0)
+        {
+            this.quantity = quantity;
+        }
     }
 }

@@ -13,41 +13,50 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ChangeQuantity extends AppCompatActivity {
-
+    TextView quantityInput;
+    int position;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.change_quantity);
-        TextView SymbolText = findViewById(R.id.SymbolText);
-        Button BackButton = (Button)findViewById(R.id.BackButton);
-        Button SaveButton = (Button)findViewById(R.id.SaveButton);
+        TextView symbolText = findViewById(R.id.symbolText);
+        TextView nameText = findViewById(R.id.name);
+        this.quantityInput=findViewById(R.id.quantityInput);
+        Button backButton = (Button)findViewById(R.id.backButton);
+        Button saveButton = (Button)findViewById(R.id.saveButton);
 
-        BackButton.setOnClickListener((new View.OnClickListener() {
+
+        Intent intent=getIntent();
+        symbolText.setText(intent.getStringExtra("symbol"));
+        nameText.setText(intent.getStringExtra("name"));
+        quantityInput.setText(intent.getStringExtra("quantity"));
+        position=intent.getIntExtra("position",-1);
+
+
+        backButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         }));
 
+
+
         //NIE DZIALA PRZYPISANIE NOWEJ WARTOSCI
-        SaveButton.setOnClickListener((new View.OnClickListener() {
+        saveButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText t = findViewById(R.id.CryptoQuantity);
-                String input = t.getText().toString();
-                ((TextView)findViewById(R.id.own_number)).setText(input);
-                Log.d("info",input);
-                //data.set(t, input);
-              //  adapter.notifyItemChanged(t);
+                Double quantity = Double.parseDouble(quantityInput.getText().toString());
+
+                Intent resultIntent=new Intent();
+                resultIntent.putExtra("newQuantity",quantity);
+                resultIntent.putExtra("position",position);
+                setResult(RESULT_OK,resultIntent);
                 finish();
             }
         }));
 
         String symbol="Symbol not set";
 
-        Bundle extras = getIntent().getExtras();
-        if(extras!=null){
-            symbol=extras.getString("symbol");
-        }
-        SymbolText.setText(symbol);
+
     }
 }

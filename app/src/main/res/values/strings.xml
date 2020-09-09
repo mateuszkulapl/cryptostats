@@ -3,5 +3,12 @@
     <string name="no_data_error_onStart">no data (start)</string>
     <string name="no_data_error">no data</string>
     <string name="no_data_yet">no data yet</string>
+    <string name="input_amount_pre">enter the amount of</string>
+    <string name="input_amount_post">you have</string>
 
+
+
+
+    <string name="save">Save</string>
+    <string name="back">Back</string>
 </resources>
