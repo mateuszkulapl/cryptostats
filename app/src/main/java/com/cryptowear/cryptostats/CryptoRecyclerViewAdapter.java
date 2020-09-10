@@ -15,6 +15,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import static java.lang.String.valueOf;
@@ -79,6 +81,9 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
              temp.execute(Cryptocurrency.getImageUrl());
         }
 
+        //pobiera logo z url
+        Picasso.get().load("https://res.cloudinary.com/dxi90ksom/image/upload/" + Cryptocurrency.getSymbol().toLowerCase() + ".png").into(holder.icon);
+
     }
     //liczba elementów listy
     @Override
@@ -117,4 +122,5 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
     {
         void onClick(View v, int position);
     }
+
 }

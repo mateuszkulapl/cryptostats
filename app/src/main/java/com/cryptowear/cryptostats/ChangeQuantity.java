@@ -40,8 +40,6 @@ public class ChangeQuantity extends AppCompatActivity {
         }));
 
 
-
-        //NIE DZIALA PRZYPISANIE NOWEJ WARTOSCI
         saveButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
