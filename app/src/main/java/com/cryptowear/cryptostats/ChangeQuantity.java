@@ -31,15 +31,12 @@ public class ChangeQuantity extends AppCompatActivity {
         quantityInput.setText(intent.getStringExtra("quantity"));
         position=intent.getIntExtra("position",-1);
 
-
         backButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         }));
-
-
         saveButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {

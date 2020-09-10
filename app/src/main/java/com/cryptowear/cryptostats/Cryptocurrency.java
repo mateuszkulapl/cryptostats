@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -26,19 +27,21 @@ public class Cryptocurrency {
     private String unit;//symbol waluty na ktora jest przeliczane
     private Double percentChange;
     private Integer id;
+    private Double marketCap;
 
-    public Cryptocurrency(String name, String symbol) {
+    public Cryptocurrency(String name, String symbol, Double marketCap) {
         this.name = name;
         this.symbol = symbol;
         this.quantity = 0.0;
         this.price = null;
         this.lastSync = null;
         this.imageUrl=null;
+        this.marketCap=marketCap;
         this.unit="$";
         this.id=null;
     }
 
-    public Cryptocurrency(String name, String symbol, String imageUrl) {
+    public Cryptocurrency(String name, String symbol, String imageUrl, Double marketCap) {
         this.name = name;
         this.symbol = symbol;
         this.quantity = 0.0;
@@ -46,6 +49,7 @@ public class Cryptocurrency {
         this.lastSync = null;
         this.imageUrl=imageUrl;
         this.unit="$";
+        this.marketCap=marketCap;
     }
     public String getName() {
         return name;
@@ -72,7 +76,10 @@ public class Cryptocurrency {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        if(this.getId()!=null)
+            return "https://s2.coinmarketcap.com/static/img/coins/64x64/" + this.getId() + ".png";
+        else
+            return null;
     }
 
     public void setPrice(Double exchangeRate) {
@@ -108,5 +115,43 @@ public class Cryptocurrency {
 
     public Integer getId(){return id;}
 
+    public void updateName(String name) {
+        this.name=name;
+    }
+
+    public static Comparator<Cryptocurrency> quantityComparator = new Comparator<Cryptocurrency>() {
+        @Override
+        public int compare(Cryptocurrency c1, Cryptocurrency c2) {
+            return (int) (c2.getQuantity().compareTo(c1.getQuantity()));
+        }
+    };
+    public static Comparator<Cryptocurrency> marketCapComparator = new Comparator<Cryptocurrency>() {
+        @Override
+        public int compare(Cryptocurrency c1, Cryptocurrency c2) {
+            return (int) (c2.getMarketCap().compareTo(c1.getMarketCap()));
+        }
+    };
+
+    public static Comparator<Cryptocurrency> valueComparator = new Comparator<Cryptocurrency>() {
+        @Override
+        public int compare(Cryptocurrency c1, Cryptocurrency c2) {
+            return (int) ((c2.getOwnValue()).compareTo(c1.getOwnValue()));
+        }
+    };
+
+    public static Comparator<Cryptocurrency> nameComparator = new Comparator<Cryptocurrency>() {
+        @Override
+        public int compare(Cryptocurrency c1, Cryptocurrency c2) {
+            return (int) ((c1.getName().toLowerCase()).compareTo(c2.getName().toLowerCase()));
+        }
+    };
+
+    private Double getMarketCap() {
+        return this.marketCap;
+    }
+
+    public void setMarketCap(Double marketCap) {
+        this.marketCap=marketCap;
+    }
 }
 

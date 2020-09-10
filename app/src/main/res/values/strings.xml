@@ -5,10 +5,12 @@
     <string name="no_data_yet">no data yet</string>
     <string name="input_amount_pre">enter the amount of</string>
     <string name="input_amount_post">you have</string>
-
-
-
-
+    <string name="wallet_value">The value of your wallet</string>
+    <string name="refresh">Refresh</string>
+    <string name="sort_by_quantity">Sort by quantity</string>
+    <string name="sort_by_market_cap">Sort by market capitalization</string>
+    <string name="sort_by_value">Sort by value</string>
+    <string name="sort_by_name">Sort by name</string>
     <string name="save">Save</string>
     <string name="back">Back</string>
 </resources>

@@ -26,7 +26,6 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
     private LayoutInflater inflater;
     private RecyclerViewClickListener listener;
 
-
     CryptoRecyclerViewAdapter(Context context, List<Cryptocurrency> CryptocurrencyList, RecyclerViewClickListener listener) {
         this.inflater = LayoutInflater.from(context);
         this.CryptocurrencyList = CryptocurrencyList;
@@ -48,16 +47,13 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         holder.icon.setImageResource(android.R.color.transparent);
         holder.name.setText(Cryptocurrency.getName());
         Double actualPrice=Cryptocurrency.getPrice();
-        String actualPriceOutput = actualPrice!=null ? String.format("%.14f",actualPrice) : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie
-        // poprawnosci danych
-        // (konstruktor
-        // przypisuje null)
+        String actualPriceOutput = actualPrice!=null ? String.format("%.14f",actualPrice) : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych konstruktorprzypisuje null)
         holder.actual_price.setText(Cryptocurrency.getUnit()+" "+actualPriceOutput);
+        //ustawienia zmiennych zwiazanych ze zmiana ceny
         String plusMinusChange="";
-
         if(Cryptocurrency.getPercentChange()>0)
         {
-         holder.actual_price.setTextColor(Color.parseColor("#00ff00"));
+            holder.actual_price.setTextColor(Color.parseColor("#008000"));
             plusMinusChange+="+";
         }
         else {
@@ -68,21 +64,18 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         plusMinusChange+=String.format("%.2f",Cryptocurrency.getPercentChange())+"%";
         holder.change.setText(plusMinusChange);
 
-        holder.own_number.setText(Cryptocurrency.getQuantity().toString());//delete
+        holder.own_number.setText(Cryptocurrency.getQuantity().toString());
         Double ownValue=Cryptocurrency.getOwnValue();
         String ownValueOutput = ownValue!=null ? ownValue.toString() : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych (wynosi null, gdy nie pobrano danych o kursie)
         holder.own_value.setText(ownValueOutput);
 
 
-        if(Cryptocurrency.getImageUrl()!=null)//pobieranie zdjecia z url, todo:zapisanie do bazy (picasso)
+        if(Cryptocurrency.getImageUrl()!=null)//pobieranie zdjecia z url
         {
-             holder.icon.setDrawingCacheEnabled(true);
-             DownloadImageTask temp= new DownloadImageTask((ImageView) holder.icon);
-             temp.execute(Cryptocurrency.getImageUrl());
+            holder.icon.setDrawingCacheEnabled(true);
+            Picasso.get().load(Cryptocurrency.getImageUrl()).into(holder.icon);
         }
 
-        //pobiera logo z url
-        Picasso.get().load("https://s2.coinmarketcap.com/static/img/coins/64x64/" + Cryptocurrency.getId() + ".png").into(holder.icon);
     }
     //liczba elementów listy
     @Override
@@ -114,8 +107,6 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
             listener.onClick(itemView, getAdapterPosition());
         }
     }
-
-
 
     public interface RecyclerViewClickListener
     {
