@@ -196,10 +196,14 @@ public class MainActivity extends AppCompatActivity {
                                 Double price = data.getJSONObject(i).getJSONObject("quote").getJSONObject("USD").getDouble("price");
                                 String lastSync = data.getJSONObject(i).getJSONObject("quote").getJSONObject("USD").getString("last_updated");
                                 Double percentChange = data.getJSONObject(i).getJSONObject("quote").getJSONObject("USD").getDouble("percent_change_24h");
+                                Integer id = data.getJSONObject(i).getInt("id");
+
                                 Cryptocurrency tempCryptocurrency = new Cryptocurrency(name, symbol);
 
                                 tempCryptocurrency.setPrice(price, lastSync, percentChange);
+                                tempCryptocurrency.setId(id);
                                 cryptocurrencies.add(tempCryptocurrency);
+
 
                                 // aktualizacja listy
                                 runOnUiThread(new Runnable() {

@@ -25,6 +25,7 @@ public class Cryptocurrency {
     private String imageUrl;
     private String unit;//symbol waluty na ktora jest przeliczane
     private Double percentChange;
+    private Integer id;
 
     public Cryptocurrency(String name, String symbol) {
         this.name = name;
@@ -34,6 +35,7 @@ public class Cryptocurrency {
         this.lastSync = null;
         this.imageUrl=null;
         this.unit="$";
+        this.id=null;
     }
 
     public Cryptocurrency(String name, String symbol, String imageUrl) {
@@ -98,4 +100,13 @@ public class Cryptocurrency {
     public Double getPercentChange() {
         return percentChange;
     }
+
+    ////////////////
+    public void setId(Integer id)
+    {
+        this.id=id;
+    }
+    public Integer getId(){return id;}
+    /////////////////
 }
+
