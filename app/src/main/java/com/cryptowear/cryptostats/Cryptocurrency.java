@@ -101,12 +101,12 @@ public class Cryptocurrency {
         return percentChange;
     }
 
-    ////////////////
     public void setId(Integer id)
     {
         this.id=id;
     }
+
     public Integer getId(){return id;}
-    /////////////////
+
 }
 

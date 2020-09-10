@@ -112,9 +112,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.settings:
-                //todo wywołanie ustawień
-                Toast.makeText(this,"Settings not implemented yet", Toast.LENGTH_SHORT).show();
+            case R.id.refresh:
+                Toast.makeText(this,"Refreshing", Toast.LENGTH_SHORT).show();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -82,7 +82,6 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         }
 
         //pobiera logo z url
-        //Picasso.get().load("https://res.cloudinary.com/dxi90ksom/image/upload/" + Cryptocurrency.getSymbol().toLowerCase() + ".png").into(holder.icon);
         Picasso.get().load("https://s2.coinmarketcap.com/static/img/coins/64x64/" + Cryptocurrency.getId() + ".png").into(holder.icon);
     }
     //liczba elementów listy
