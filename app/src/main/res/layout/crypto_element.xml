@@ -10,6 +10,7 @@
         android:layout_width="63dp"
         android:layout_height="58dp"
         android:layout_weight="0"
+        android:contentDescription="icon"
         app:srcCompat="@android:drawable/ic_menu_report_image" />
 
     <LinearLayout
@@ -69,7 +70,7 @@
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="0"
             android:background="?android:attr/listDivider" />
 

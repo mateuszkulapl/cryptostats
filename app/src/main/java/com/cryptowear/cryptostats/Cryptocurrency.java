@@ -122,27 +122,27 @@ public class Cryptocurrency {
     public static Comparator<Cryptocurrency> quantityComparator = new Comparator<Cryptocurrency>() {
         @Override
         public int compare(Cryptocurrency c1, Cryptocurrency c2) {
-            return (int) (c2.getQuantity().compareTo(c1.getQuantity()));
+            return c2.getQuantity().compareTo(c1.getQuantity());
         }
     };
     public static Comparator<Cryptocurrency> marketCapComparator = new Comparator<Cryptocurrency>() {
         @Override
         public int compare(Cryptocurrency c1, Cryptocurrency c2) {
-            return (int) (c2.getMarketCap().compareTo(c1.getMarketCap()));
+            return c2.getMarketCap().compareTo(c1.getMarketCap());
         }
     };
 
     public static Comparator<Cryptocurrency> valueComparator = new Comparator<Cryptocurrency>() {
         @Override
         public int compare(Cryptocurrency c1, Cryptocurrency c2) {
-            return (int) ((c2.getOwnValue()).compareTo(c1.getOwnValue()));
+            return (c2.getOwnValue()).compareTo(c1.getOwnValue());
         }
     };
 
     public static Comparator<Cryptocurrency> nameComparator = new Comparator<Cryptocurrency>() {
         @Override
         public int compare(Cryptocurrency c1, Cryptocurrency c2) {
-            return (int) ((c1.getName().toLowerCase()).compareTo(c2.getName().toLowerCase()));
+            return (c1.getName().toLowerCase()).compareTo(c2.getName().toLowerCase());
         }
     };
 

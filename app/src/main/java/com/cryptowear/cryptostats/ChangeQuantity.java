@@ -21,8 +21,8 @@ public class ChangeQuantity extends AppCompatActivity {
         TextView symbolText = findViewById(R.id.symbolText);
         TextView nameText = findViewById(R.id.name);
         this.quantityInput=findViewById(R.id.quantityInput);
-        Button backButton = (Button)findViewById(R.id.backButton);
-        Button saveButton = (Button)findViewById(R.id.saveButton);
+        Button backButton = findViewById(R.id.backButton);
+        Button saveButton = findViewById(R.id.saveButton);
 
 
         Intent intent=getIntent();

@@ -47,7 +47,7 @@ public class CryptoRecyclerViewAdapter extends RecyclerView.Adapter<CryptoRecycl
         holder.icon.setImageResource(android.R.color.transparent);
         holder.name.setText(Cryptocurrency.getName());
         Double actualPrice=Cryptocurrency.getPrice();
-        String actualPriceOutput = actualPrice!=null ? String.format("%.14f",actualPrice) : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych konstruktorprzypisuje null)
+        String actualPriceOutput = (actualPrice != null) ? String.format("%.14f", actualPrice) : holder.itemView.getContext().getString(R.string.no_data_yet);//sprawdzanie poprawnosci danych konstruktorprzypisuje null)
         holder.actual_price.setText(Cryptocurrency.getUnit()+" "+actualPriceOutput);
         //ustawienia zmiennych zwiazanych ze zmiana ceny
         String plusMinusChange="";

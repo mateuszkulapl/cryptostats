@@ -38,7 +38,7 @@ import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     List<Cryptocurrency> cryptocurrencies = new ArrayList<>();
-    String apiKey = "36c74fa4-2214-41ee-8000-43b9a8af6237";//coimarketcap api key
+    String apiKey = "";//coimarketcap api key
     final int limit = 100;//number of cryptocurrency to download from api, default sort by market capitaliaztion
     private CryptoRecyclerViewAdapter.RecyclerViewClickListener listener;
     RecyclerView recyclerView;
@@ -79,17 +79,20 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
-    private void updateSummary() {
+    private void updateSummary(double totalValue) {
         if(isUpdatingSummary==false) {//pritection against ConcurrentModificationException
             this.isUpdatingSummary=true;
-            double totalValue = 0.0;
-            for (Cryptocurrency crypto : this.cryptocurrencies) {
-                totalValue += crypto.getOwnValue();
-            }
-            String newValueText = String.format("%.2f", totalValue);
+            String newValueText = "$" +String.format("%.2f", totalValue);
             this.summaryValue.setText(newValueText);
             this.isUpdatingSummary=false;
         }
+    }
+    private Double getTotalVelue(){
+        double totalValue = 0.0;
+        for (Cryptocurrency crypto : this.cryptocurrencies) {
+            totalValue += crypto.getOwnValue();
+        }
+        return totalValue;
     }
 
     @Override
@@ -103,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 if (position >= 0 && position < cryptocurrencies.size()) {
                     cryptocurrencies.get(position).setQuantity(newQuantity);
                     this.adapter.notifyDataSetChanged();
-                    updateSummary();
+                    updateSummary(getTotalVelue());
                 }
             }
             if (resultCode == RESULT_CANCELED) {
@@ -174,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private void refreshExchangeRate() {
         getCryptoMetadata(apiKey, limit);
+
     }
 
     private void getCryptoMetadata(final String apiKey, final int limit) {
@@ -202,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
                             //cały obiekt jest w jednej linii
                             JSONObject jsonObject = new JSONObject(br.readLine());
 
-                            JSONObject status = (JSONObject) jsonObject.getJSONObject("status");
+                            JSONObject status = jsonObject.getJSONObject("status");
                             Log.d("status len", valueOf(status.length()));
                             apiConnection.disconnect();
                             JSONArray data = jsonObject.getJSONArray("data");
@@ -225,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            adapter.notifyDataSetChanged(); updateSummary();
+                                            adapter.notifyDataSetChanged(); updateSummary(getTotalVelue());
 
                                         }
                                     });
@@ -239,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
                                             @Override
                                             public void run() {
                                                 adapter.notifyDataSetChanged();
+                                                updateSummary(getTotalVelue());
                                             }
                                         });
                                         Log.d("update", cryptocurrencies.get(indexOfNewInArray).getName());
