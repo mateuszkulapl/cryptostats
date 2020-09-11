@@ -41,16 +41,6 @@ public class Cryptocurrency {
         this.id=null;
     }
 
-    public Cryptocurrency(String name, String symbol, String imageUrl, Double marketCap) {
-        this.name = name;
-        this.symbol = symbol;
-        this.quantity = 0.0;
-        this.price = null;
-        this.lastSync = null;
-        this.imageUrl=imageUrl;
-        this.unit="$";
-        this.marketCap=marketCap;
-    }
     public String getName() {
         return name;
     }
@@ -80,10 +70,6 @@ public class Cryptocurrency {
             return "https://s2.coinmarketcap.com/static/img/coins/64x64/" + this.getId() + ".png";
         else
             return null;
-    }
-
-    public void setPrice(Double exchangeRate) {
-        this.price=exchangeRate;
     }
 
     public String getUnit() {
