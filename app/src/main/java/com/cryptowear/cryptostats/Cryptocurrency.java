@@ -22,7 +22,7 @@ public class Cryptocurrency {
     private String symbol;//skrot
     private Double quantity;//posiadana liczba
     private Double price;
-    private String lastSync;//ostatnia aktualizacja//todo: change to Date
+    private String lastSync;//ostatnia aktualizacja
     private String imageUrl;
     private String unit;//symbol waluty na ktora jest przeliczane
     private Double percentChange;

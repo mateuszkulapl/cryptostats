@@ -38,7 +38,7 @@ import static java.lang.String.valueOf;
 
 public class MainActivity extends AppCompatActivity {
     List<Cryptocurrency> cryptocurrencies = new ArrayList<>();
-    String apiKey = "";//coimarketcap api key
+    String apiKey = "36c74fa4-2214-41ee-8000-43b9a8af6237";//coimarketcap api key
     final int limit = 100;//number of cryptocurrency to download from api, default sort by market capitaliaztion
     private CryptoRecyclerViewAdapter.RecyclerViewClickListener listener;
     RecyclerView recyclerView;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateSummary(double totalValue) {
-        if(isUpdatingSummary==false) {//pritection against ConcurrentModificationException
+        if(!isUpdatingSummary) {
             this.isUpdatingSummary=true;
             String newValueText = "$" +String.format("%.2f", totalValue);
             this.summaryValue.setText(newValueText);
@@ -88,9 +88,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private Double getTotalVelue(){
+        List<Cryptocurrency> copyOfCryptocurrencies=this.cryptocurrencies;
         double totalValue = 0.0;
-        for (Cryptocurrency crypto : this.cryptocurrencies) {
-            totalValue += crypto.getOwnValue();
+        for (Cryptocurrency next : copyOfCryptocurrencies) {
+            totalValue += next.getOwnValue();
         }
         return totalValue;
     }
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
     private void getCryptoMetadata(final String apiKey, final int limit) {
         Log.d("getCryptoMetadata", "getCryptoMetadata");
         if (limit > 0) {
-            HashMap<String, String> queries = new HashMap<String, String>();
+            HashMap<String, String> queries = new HashMap<>();
             queries.put("sort", "market_cap");
             queries.put("sort_dir", "desc");
             queries.put("aux", "");
@@ -210,6 +211,8 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("status len", valueOf(status.length()));
                             apiConnection.disconnect();
                             JSONArray data = jsonObject.getJSONArray("data");
+                            List<Cryptocurrency> cryptoToBeAdd;
+                            cryptoToBeAdd = new ArrayList<Cryptocurrency>();
                             for (int i = 0; i < data.length(); i++) {
                                 String name = data.getJSONObject(i).getString("name");
                                 String symbol = data.getJSONObject(i).getString("symbol");
@@ -224,7 +227,11 @@ public class MainActivity extends AppCompatActivity {
                                 if (indexOfNewInArray == -1) {//dodanie kryptowaluty do listy
                                     tempCryptocurrency.setPrice(price, lastSync, percentChange);
                                     tempCryptocurrency.setId(id);
-                                    cryptocurrencies.add(tempCryptocurrency);
+
+
+                                    cryptoToBeAdd.add(tempCryptocurrency);
+
+
                                     // aktualizacja listy
                                     runOnUiThread(new Runnable() {
                                         @Override
@@ -252,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                             }
+                            cryptocurrencies.addAll(cryptoToBeAdd);
                         } else {
                             Log.d("error:", getResponseFromResponseCode(apiCode));
                         }
@@ -265,23 +273,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String getQueryFromMap(HashMap<String, String> queries) {
-        String urlParams = "";
+        StringBuilder urlParams = new StringBuilder();
         if (queries.size() > 0)
-            urlParams += "?";
+            urlParams.append("?");
         Iterator<Map.Entry<String, String>> it = queries.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<String, String> pair = it.next();
-            urlParams += pair.getKey() + "=" + pair.getValue();
+            urlParams.append(pair.getKey()).append("=").append(pair.getValue());
             if (it.hasNext()) {
-                urlParams += "&";
+                urlParams.append("&");
             }
         }
-        return urlParams;
+        return urlParams.toString();
 
     }
 
     private String getResponseFromResponseCode(int code) {
-        HashMap<Integer, String> responses = new HashMap<Integer, String>();
+        HashMap<Integer, String> responses = new HashMap<>();
         responses.put(400, "Bad Request");
         responses.put(401, "Unauthorized");
         responses.put(403, "Forbidden");
